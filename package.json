@@ -1,0 +1,15 @@
+{
+  "name": "twitch_wrapper",
+  "version": "0.0.1",
+  "description": "An easy-to-use wrapper for the twitch api",
+  "main": "debug.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "FlareonTheProgrammer",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "quick.db": "^7.1.1",
+    "unirest": "^0.6.0"
+  }
+}
