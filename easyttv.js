@@ -3,7 +3,12 @@ const db = require("quick.db");
 const cData = new db.table("cData");
 const helixAPI = "https://api.twitch.tv/helix";
 
-// Custom Authentication Error Class
+
+/**
+ * Custom Authentication Error Class
+ *
+ * @type {AuthError}
+ */
 class AuthError extends Error {
   constructor(msg, statCode, details, ...params) {
     super(...params);
@@ -18,15 +23,27 @@ class AuthError extends Error {
     this.details = String(details);
   }
 }
-// End of auth error class
 
+
+/**
+ * Setup (init) function to create database
+ *
+ * @type {Function}
+ */
 exports.init = function init(id, secret) {
   cData.set("id", id);
   cData.set("secret", secret);
 };
 const clientID = cData.get("id");
 
-//* Get a token
+
+/**
+ * Token Getter Function
+ *
+ *  If request for token is denied, throw custom auth error
+ * 
+ * @type {Function}
+ */
 async function getNewToken() {
   await unirest
     .post("https://id.twitch.tv/oauth2/token")
@@ -52,11 +69,24 @@ async function getNewToken() {
     })
     .catch((err) => console.error(err));
 }
-// End of token request function
 
+/**
+ * Authentication Header Value
+ * 
+ * This is a very useful value to have on hand, it saves a lot of typing later on.
+ *
+ * @type {string}
+ */
 let auth = `Bearer ${cData.get("token")}`
 
-//* Check Authorization
+
+/**
+ * Check Authorization before carrying out any requests
+ * 
+ * If auth fails, ask twitch for new token by calling newToken();
+ * 
+ * @type {Function}
+ */
 async function checkAuth() {
   let respCode;
   if (cData.get("token") === undefined) {
@@ -114,7 +144,7 @@ exports.basicReq = async function ttvBasicReq(method, resource, query, value) {
 /**
  * Bullshit time
  *
- * @type {Object}
+ * @type {MagicRq}
  */
 class MagicRq {
   constructor() {

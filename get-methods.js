@@ -3,11 +3,11 @@ const { checkAuth, helixAPI, auth, clientID } = require("./easyttv.js");
 let method = "get";
 
 class get {
-  clips = function () {
+  clips = () => {
     this.resource = "clips";
     return this;
   };
-  games = function () {
+  games = () => {
     this.resource = "games";
     return this;
   };
@@ -23,11 +23,15 @@ class get {
     this.resource = "users";
     return this;
   };
-
-  data = async (queryObj) => {
+  /**
+  * Beta data
+  *
+  * @type {Function}
+  */
+  async data(queryObj) {
     let resp;
     await checkAuth();
-    await unirest[method](`${helixAPI}/${this.resource}`)
+    await unirest[this.method](`${helixAPI}/${this.resource}`)
       .headers({
         Authorization: auth,
         "Client-ID": clientID,
