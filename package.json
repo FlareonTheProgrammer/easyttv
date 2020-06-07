@@ -1,6 +1,6 @@
 {
   "name": "twitch_wrapper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An easy-to-use wrapper for the twitch api",
   "main": "debug.js",
   "scripts": {
