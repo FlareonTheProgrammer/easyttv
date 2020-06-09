@@ -4,4 +4,4 @@
 
 ---
 
-Lorem ipsum dolor sit amet
+Current version: v0.1.2
