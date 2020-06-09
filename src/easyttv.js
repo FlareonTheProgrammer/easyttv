@@ -133,39 +133,22 @@ async function checkAuth() {
 
 
 /**
- * v0.0.1 Basic Request Method
+ * v0.1.0 (previously BETA)
  *
- * @type {Function}
  */
-exports.basicReq = async function ttvBasicReq(method, resource, query, value) {
-  let resp;
-  await checkAuth();
-  await unirest[method](`${helixAPI}/${resource}?${query}=${value}`)
-    .headers({
-      Authorization: auth,
-      "Client-ID": clientID,
-    })
-    .send()
-    .then((response) => {
-      resp = response.body;
-    });
-  return resp;
-};
-
-
-//WIP Beta EasyTTV
 
 const gme = require("./res/get-endpoints");
-
 // Export gme
 exports.gme = gme;
 
 /**
- * Bullshit time
+ * MagicRq
+ * (Also known as the thing that makes this work!)
  *
  * @type {MagicRq}
  */
 class MagicRq {
+  //* GET REQUESTS
   get = (rsrc) => {
     this.method = "get";
     if (JSON.stringify(gme).includes(rsrc)) {
@@ -174,6 +157,11 @@ class MagicRq {
     else { throw (`"${rsrc}" isn't a valid resource or resource alias.`) };
     return this;
   };
+
+  //* POST REQUESTS
+
+
+  //* DATA FOR TWITCH TO PROCESS
   data = async (queryObject) => {
     let resp;
     await checkAuth();
@@ -199,12 +187,9 @@ class MagicRq {
   }
 }
 
-
 /**
- * Beta Exports
+ * v0.1.0 Exports
  *
  * @type {any}
  */
-
-// Export the class
-exports.betaReq = MagicRq;
+exports.stableReq = MagicRq;
