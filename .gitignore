@@ -1,2 +1,5 @@
 # Client Data
 json.sqlite
+
+# Node Modules
+node_modules/
