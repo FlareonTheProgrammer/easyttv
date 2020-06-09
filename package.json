@@ -9,12 +9,10 @@
   "author": "FlareonTheProgrammer",
   "license": "AGPL-3.0",
   "dependencies": {
-    "node-cache": "^5.1.1",
     "quick.db": "^7.1.1",
     "unirest": "^0.6.0"
   },
   "devDependencies": {
-    "chalk": "^4.0.0",
-    "typescript-require": "github:acheronfail/typescript-require#fix/deprecation-warning"
+    "chalk": "^4.0.0"
   }
 }
