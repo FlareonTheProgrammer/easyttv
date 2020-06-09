@@ -35,4 +35,4 @@ let clientInfo = [
         return console.log("Got it. Remember to import init in order to set up easyTTV, you'll only have to do it once.")
     }
     return;
-});
+}());
