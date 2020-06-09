@@ -3,3 +3,5 @@ json.sqlite
 
 # Node Modules
 node_modules/
+
+.vscode/
