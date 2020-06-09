@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "node ./tests/debug.js",
-    "postinstall": "node setup.js"
+    "install": "node setup.js"
   },
   "author": "FlareonTheProgrammer",
   "license": "AGPL-3.0",
