@@ -1,10 +1,11 @@
 {
   "name": "easyttv",
-  "version": "0.0.2",
+  "version": "0.1.2",
   "description": "An easy-to-use wrapper for the twitch api",
-  "main": "./src/easyttv.js",
+  "main": "./src/main.js",
   "scripts": {
-    "test": "node ./tests/debug.js"
+    "test": "node ./tests/debug.js",
+    "setup": "node ./setup.js"
   },
   "author": "FlareonTheProgrammer",
   "license": "AGPL-3.0",

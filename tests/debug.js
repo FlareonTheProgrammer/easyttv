@@ -1,4 +1,4 @@
-const { stableReq, gme } = require("../src/easyttv");
+const { stableReq, gme } = require("../src/main");
 stable = new stableReq();
 async function test() {
   console.log("\n\x1b[36m\x1b[1m[ v0.1.0 Request ]\x1b[0m")

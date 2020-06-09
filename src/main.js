@@ -132,18 +132,16 @@ async function checkAuth() {
 
 
 
-/**
- * v0.1.0 (previously BETA)
- *
- */
 
-const gme = require("./res/get-endpoints");
+//* v0.1.0 (previously BETA)
+
+const { gme } = require("./res/get-endpoints");
 // Export gme
 exports.gme = gme;
 
 /**
  * MagicRq
- * (Also known as the thing that makes this work!)
+ * * Also known as the thing that makes this work
  *
  * @type {MagicRq}
  */
@@ -185,6 +183,7 @@ class MagicRq {
       });
     return resp;
   }
+  // End of MagicRq Class
 }
 
 /**
