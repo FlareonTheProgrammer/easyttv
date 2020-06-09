@@ -4,6 +4,8 @@ const db = require("quick.db")
 const cData = new db.table("cData");
 const helixAPI = "https://api.twitch.tv/helix";
 
+exports.cData = cData;
+
 /**
  * Custom Authentication Error Class
  *
