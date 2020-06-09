@@ -1,15 +1,20 @@
 {
-  "name": "twitch_wrapper",
+  "name": "easyttv",
   "version": "0.0.2",
   "description": "An easy-to-use wrapper for the twitch api",
-  "main": "debug.js",
+  "main": "./src/easyttv.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./tests/debug.js"
   },
   "author": "FlareonTheProgrammer",
   "license": "AGPL-3.0",
   "dependencies": {
+    "node-cache": "^5.1.1",
     "quick.db": "^7.1.1",
     "unirest": "^0.6.0"
+  },
+  "devDependencies": {
+    "chalk": "^4.0.0",
+    "typescript-require": "github:acheronfail/typescript-require#fix/deprecation-warning"
   }
 }
