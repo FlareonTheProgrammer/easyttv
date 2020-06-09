@@ -28,7 +28,7 @@ let clientInfo = [
         console.log("Got it. Beginning setup of easyTTV...");
         const resp = await inquirer.prompt(clientInfo);
         cData.set("id", resp.id);
-        cData.set("secret", res.secret);
+        cData.set("secret", resp.secret);
         return console.log("Setup complete!");
     }
     else if (beginSetup.proceed === "No") {
