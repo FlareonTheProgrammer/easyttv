@@ -3,10 +3,10 @@ const db = require("quick.db")
 const autoComCaller = __filename
 const autoCom = require("./utils/autocomment");
 
-/* AC Begin Callback Label: "qdbfix"
+// Begin auto-comment qdbfix
 require("../quickdbfix")();
-AC End Callback Label: qdbfix */
-// autoCom.com(autoComCaller, "qdbfix");
+// End auto-comment qdbfix
+autoCom.com(autoComCaller, "qdbfix");
 
 const cData = new db.table("cData");
 const helixAPI = "https://api.twitch.tv/helix";
