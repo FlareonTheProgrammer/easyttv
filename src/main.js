@@ -1,5 +1,22 @@
 const unirest = require("unirest");
 const db = require("quick.db")
+const fs = require("fs");
+
+// the checc1
+if (fs.existsSync("./node_modules/easyttv/json.sqlite")) {
+  fs.renameSync("./node_modules/easyttv/json.sqlite", "./json.sqlite");
+  fs.readFile("./node_modules/easyttv/src/main.js", 'utf8', function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    var result = data.replace(/^\/\/ the checc1$/g, "/*").replace(/^\/\/ the checc2$/g, "*/");
+
+    fs.writeFile("./node_modules/easyttv/src/main.js", result, "utf8", function (err) {
+      if (err) return console.log(err);
+    });
+  });
+}
+//the checc2
 
 const cData = new db.table("cData");
 const helixAPI = "https://api.twitch.tv/helix";
