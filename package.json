@@ -2,7 +2,7 @@
   "name": "easyttv",
   "version": "0.1.2",
   "description": "An easy-to-use wrapper for the twitch api",
-  "main": "main.js",
+  "main": "./src/main.js",
   "scripts": {
     "test": "node ./tests/debug.js",
     "postinstall": "node setup.js"
