@@ -23,4 +23,4 @@ ettv = new stableReq();
 console.log(`${JSON.stringify(await ettv.get(gme.user).data({ login: "chefbear" }))}`);
 ```
 
-For more information, check out the gme file at ./node_modules/easyttv/src/res/get-endpoints.js
+For more information, check out the gme file [here](https://github.com/FlareonTheProgrammer/easyttv/blob/master/src/res/get-endpoints.js).
