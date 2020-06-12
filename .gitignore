@@ -8,5 +8,5 @@ node_modules/
 .vscode/
 easyttv_development.code-workspace
 
-# DEBUG #4
-test.js
+# Node Package Lock
+package-lock.json
