@@ -60,8 +60,14 @@ async function getNewToken() {
         );
       }
     })
-    .catch((err) => console.error(err));
-}
+    .catch((err) => {
+      if (err instanceof AuthError) {
+        throw(err);
+      }
+      else {
+      console.error(err);
+      };
+})};
 
 /**
  * Authentication Header Value
