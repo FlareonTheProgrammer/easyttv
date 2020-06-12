@@ -62,6 +62,7 @@ async function getNewToken() {
     })
     .catch((err) => {
       if (err instanceof AuthError) {
+        console.error(err);
         throw(err);
       }
       else {
