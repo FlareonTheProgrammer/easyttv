@@ -198,4 +198,4 @@ class MagicRq {
  *
  * @type {any}
  */
-exports.stableReq = MagicRq;
+exports.easyttvRq = MagicRq;
