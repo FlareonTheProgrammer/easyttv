@@ -26,15 +26,6 @@ class AuthError extends Error {
   }
 }
 
-/**
- * Setup (init) function to create database
- *
- * @type {Function}
- */
-exports.init = function init(id, secret) {
-  cData.set("id", id);
-  cData.set("secret", secret);
-};
 const clientID = cData.get("id");
 
 /**
@@ -54,7 +45,7 @@ async function getNewToken() {
       grant_type: "client_credentials",
     })
     .then(async (response) => {
-      if (response.status == 401) {
+      if (response.status != 200) {
         throw new AuthError(
           "Authentication failed!",
           response.status,
