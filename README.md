@@ -4,7 +4,7 @@
 
 ---
 
-Current version: v0.1.2
+Current version: v0.2.1
 
 ### Installation
 
@@ -20,7 +20,7 @@ Setup should begin after install. Follow the prompts to set up easyttv for use w
 const { stableReq, gme } = require("easyttv");
 ettv = new stableReq();
 
-console.log(await ettv.get(gme.user).data({ login: "chefbear" }));
+console.log(`${JSON.stringify(await ettv.get(gme.user).data({ login: "chefbear" }))}`);
 ```
 
 For more information, check out the gme file at ./node_modules/easyttv/src/res/get-endpoints.js
