@@ -4,4 +4,9 @@ json.sqlite
 # Node Modules
 node_modules/
 
+# VSC
 .vscode/
+easyttv_development.code-workspace
+
+# DEBUG #4
+test.js
