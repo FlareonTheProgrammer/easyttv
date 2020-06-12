@@ -2,9 +2,9 @@ const fs = require("fs");
 
 class autoCom {
     static com = (filepath, label) => {
-        let labelStart = new RegExp(`\\/\\/ Begin auto-comment ${label}`);
-        let labelEnd = new RegExp(`\\/\\/ End auto-comment ${label}`);
-        let noRep = new RegExp(`autoCom\\.com\\(autoComCaller\\, \\"${label}\\"\\)`);
+        let labelStart = new RegExp(`\\/\\/ Begin auto-comment ${label}`, g);
+        let labelEnd = new RegExp(`\\/\\/ End auto-comment ${label}`, g);
+        let noRep = new RegExp(`autoCom\\.com\\(autoComCaller\\, \\"${label}\\"\\)`, g);
         fs.readFile(filepath, 'utf8', function (err, data) {
             if (err) {
                 return console.log(err);
@@ -21,9 +21,9 @@ class autoCom {
     }
 
     static uncom = (filepath, label) => {
-        let labelStart = new RegExp(`\\/\\* Begin auto-uncomment ${label}`);
-        let labelEnd = new RegExp(`End auto-uncomment ${label} \\*\\/`);
-        let noRep = new RegExp(`autoCom\\.uncom\\(autoComCaller\\, \\"${label}\\"\\)`);
+        let labelStart = new RegExp(`\\/\\* Begin auto-uncomment ${label}`, g);
+        let labelEnd = new RegExp(`End auto-uncomment ${label} \\*\\/`, g);
+        let noRep = new RegExp(`autoCom\\.uncom\\(autoComCaller\\, \\"${label}\\"\\)`, g);
         fs.readFile(filepath, 'utf8', function (err, data) {
             if (err) {
                 return console.log(err);
