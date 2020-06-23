@@ -1,5 +1,7 @@
+"use strict"
 const unirest = require("unirest");
 const db = require("quick.db");
+const flog = require("flogger");
 
 const cData = new db.table("cData");
 const helixAPI = "https://api.twitch.tv/helix";
@@ -55,20 +57,19 @@ async function getNewToken() {
         await cData.delete("token");
         await cData.set("token", response.body.access_token);
         auth = `Bearer ${cData.get("token")}`;
-        console.log(
-          "[ NEW_TOKEN ] \x1b[32mSUCCESS: Got token from Twitch and stored it in the database\x1b[0m"
-        );
+        flog.custom("TOKEN", "cyan", "SUCCESS: Got token from Twitch and stored it in the database");
       }
     })
     .catch((err) => {
       if (err instanceof AuthError) {
-        console.error(err);
-        throw(err);
+        flog.error(err);
+        throw (err);
       }
       else {
-      console.error(err);
+        flog.error(err);
       };
-})};
+    })
+};
 
 /**
  * Authentication Header Value
@@ -92,8 +93,8 @@ async function checkAuth() {
 
   try {
     if (cData.get("token") === undefined) {
-      console.warn(
-        "\x1b[37m[\x1b[33m Auth \x1b[37m]\x1b[33mNo token found in database. \x1b[37m- \x1b[0mRequesting one from Twitch..."
+      flog.custom(
+        "AUTH", "yellow", "No token found in database. Requesting one from Twitch..."
       );
       await getNewToken();
       return;
@@ -108,29 +109,29 @@ async function checkAuth() {
     // Okay so here's where this ugly piece of code that checks for and hopefully handles recursion
     process.env.recursionCheck = new Number(process.env.recursionCheck) + 1;
     if (process.env.recursionCheck > 1) {
-      return console.warn(
-        `\x1b[31m[ RE:CURSE ]\x1b[91m[${process.env.recursionCheck}]\x1b[31m Recursion detected. Attempting to exit loop... If successful, there will be no further output from RE:CURSE.\x1b[0m`
+      return flog.custom(
+        `RE:CURSE (${process.env.recursionCheck})`, "red", "Recursion detected. Attempting to exit loop... If successful, there will be no further output from RE:CURSE."
       );
     }
     process.env.recursionDoubleCheck =
       new Number(process.env.recursionDoubleCheck) + 1;
     if (process.env.recursionDoubleCheck > 1) {
-      return console.warn(
-        `\x1b[31m[ RE:CURSE ]\x1b[91m[${process.env.recursionCheck}]\x1b[31m Loop exit was unsuccessful. In the future, this \x1b[4mwill\x1b[0;31m result in an an exception being thrown.\x1b[0m`
+      return flog.custom(
+        `RE:CURSE (${process.env.recursionCheck})`, "red", "Loop exit was unsuccessful. In the future, this will result in an an exception being thrown."
       );
     }
     // End of this disgusting code
 
-    console.log(`Twitch server responded with code: ${resp.code}`);
+    flog.info(`Twitch server responded with code: ${resp.code}`);
     if (resp.code == 401) {
-      console.warn(
-        "\x1b[37m[\x1b[33m Auth \x1b[37m]\x1b[33m Authentication failed. \x1b[37m- \x1b[0mRequesting new token from Twitch..."
+      flog.custom(
+        "AUTH", "yellow", "Authentication failed. Requesting new token from Twitch..."
       );
       await getNewToken();
       return;
     } else {
-      console.log(
-        "\x1b[32mAuthentication successful. \x1b[37m- \x1b[0mNo need to request new token."
+      flog.custom(
+        "AUTH", "green", "Authentication successful. No need to request new token."
       );
       return;
     }
@@ -143,6 +144,7 @@ async function checkAuth() {
 //* v0.1.0 (previously BETA)
 
 const { gme } = require("./res/get-endpoints");
+const flogger = require("flogger");
 // Export gme
 exports.gme = gme;
 
@@ -178,14 +180,7 @@ class MagicRq {
       .query(queryObject)
       .send()
       .then((response) => {
-        console.log(
-          "\x1b[1m\x1b[37m",
-          "[" + "\x1b[34m",
-          "MagicRq",
-          "\x1b[37m" + "]",
-          "\x1b[0m\x1b[34m",
-          "Response received.\x1b[0m"
-        );
+        flog.custom("MagicRq", "blue", "Response received.");
         resp = response.body.data[0];
       });
     return resp;

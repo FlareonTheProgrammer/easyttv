@@ -7,6 +7,3 @@ node_modules/
 # VSC
 .vscode/
 easyttv_development.code-workspace
-
-# Node Package Lock
-package-lock.json

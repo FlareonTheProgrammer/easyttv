@@ -11,6 +11,7 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "caller-path": "^3.0.0",
+    "flogger": "github:FlareonTheProgrammer/fLogger",
     "inquirer": "^7.1.0",
     "quick.db": "^7.1.1",
     "unirest": "^0.6.0"

@@ -1,5 +1,5 @@
-const { stableReq, gme } = require("../src/main");
-stable = new stableReq();
+const { easyttvRq, gme } = require("../src/main");
+stable = new easyttvRq();
 (async function () {
   console.log("\n\x1b[36m\x1b[1m[ v0.1.0 Request ]\x1b[0m")
   console.log(
