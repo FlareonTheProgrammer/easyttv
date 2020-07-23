@@ -12,3 +12,6 @@ tsconfig.json
 # VSC
 .vscode/
 **.code-workspace
+
+# Mappings
+**.map
