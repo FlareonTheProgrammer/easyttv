@@ -10,6 +10,7 @@ exports.gme = void 0;
  *
  * @type {Object}
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 exports.gme = {
     /**
      * @name allStreamTags

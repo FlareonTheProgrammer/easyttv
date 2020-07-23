@@ -11,8 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer_1 = require("inquirer");
 const jsondb_1 = require("jsondb");
-const fs_1 = require("fs");
-const cData = new jsondb_1.Database(`../${__dirname}`, "clientData");
+const cData = new jsondb_1.Database(`${__dirname}/..`, "clientData");
 const setup = [
     {
         type: "list",
@@ -35,25 +34,21 @@ const clientInfo = [
 ];
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
-        if (fs_1.existsSync(`../${__dirname}/clientData.json`)) {
-            return;
+        const beginSetup = yield inquirer_1.prompt(setup);
+        if (beginSetup.proceed === "Yes") {
+            console.log("Got it. Beginning setup of easyTTV...\n");
+            console.log("If you don't have a Twitch application, you can create one at https://dev.twitch.tv");
+            const resp = yield inquirer_1.prompt(clientInfo);
+            cData.overwrite({
+                id: resp.id,
+                secret: resp.secret,
+            });
+            console.log("Client data file created.");
         }
-        else {
-            const beginSetup = yield inquirer_1.prompt(setup);
-            if (beginSetup.proceed === "Yes") {
-                console.log("Got it. Beginning setup of easyTTV...");
-                const resp = yield inquirer_1.prompt(clientInfo);
-                cData.overwrite({
-                    id: resp.id,
-                    secret: resp.secret,
-                });
-                console.log("Client data file created.");
-            }
-            else if (beginSetup.proceed === "No") {
-                return console.log("Got it. You'll eventually have to do this in order to make easyTTV work.");
-            }
-            return;
+        else if (beginSetup.proceed === "No") {
+            return console.log("Got it. You'll eventually have to do this in order to make easyTTV work.");
         }
+        return;
     });
 })();
 //# sourceMappingURL=setup.js.map

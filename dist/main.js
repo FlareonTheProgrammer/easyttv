@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.easyttvRq = exports.gme = void 0;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const unirest = require("unirest");
@@ -120,8 +121,7 @@ function checkAuth() {
 // End of Auth Check
 //* v0.1.0 (previously BETA)
 const get_endpoints_1 = require("./res/get-endpoints");
-// Export gme
-exports.gme = get_endpoints_1.gme;
+Object.defineProperty(exports, "gme", { enumerable: true, get: function () { return get_endpoints_1.gme; } });
 /**
  * MagicRq
  * * Also known as the thing that makes this work
@@ -131,6 +131,7 @@ exports.gme = get_endpoints_1.gme;
 class MagicRq {
     constructor() {
         //* GET REQUESTS
+        // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
         this.get = (rsrc) => {
             this.method = "get";
             if (JSON.stringify(get_endpoints_1.gme).includes(rsrc)) {
@@ -143,6 +144,7 @@ class MagicRq {
         };
         //* POST REQUESTS
         //* DATA FOR TWITCH TO PROCESS
+        // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
         this.data = (queryObject) => __awaiter(this, void 0, void 0, function* () {
             let resp;
             yield checkAuth();
@@ -163,10 +165,5 @@ class MagicRq {
         // End of MagicRq Class
     }
 }
-/**
- * v0.1.0 Exports
- *
- * @type {any}
- */
 exports.easyttvRq = MagicRq;
 //# sourceMappingURL=main.js.map
