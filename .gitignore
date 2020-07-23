@@ -1,11 +1,14 @@
 # Client Data
-json.sqlite
+clientData.json
 
 # Node Modules
 node_modules/
 
+# DevShit (tm)
+src/
+.eslint**
+tsconfig.json
+
 # VSC
 .vscode/
 **.code-workspace
-
-src/
