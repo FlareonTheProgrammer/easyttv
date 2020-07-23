@@ -4,16 +4,27 @@
   "description": "An easy-to-use wrapper for the twitch api",
   "main": "./src/main.js",
   "scripts": {
-    "test": "node ./tests/debug.js",
-    "postinstall": "node setup.js"
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./dist/test/index.test.js",
+    "postinstall": "node ./dist/setup/setup.js"
   },
   "author": "FlareonTheProgrammer",
   "license": "AGPL-3.0",
   "dependencies": {
-    "caller-path": "^3.0.0",
+    "@types/inquirer": "^7.3.0",
     "flogger": "github:FlareonTheProgrammer/fLogger",
     "inquirer": "^7.1.0",
-    "quick.db": "^7.1.1",
+    "jsondb": "github:megablazedevs/jsondb",
     "unirest": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.24",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
+    "typescript": "^3.9.7"
   }
 }
