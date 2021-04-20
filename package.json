@@ -2,7 +2,7 @@
   "name": "easyttv",
   "version": "0.2.1",
   "description": "An easy-to-use wrapper for the twitch api",
-  "main": "./src/main.js",
+  "main": "./dist/main.js",
   "scripts": {
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
