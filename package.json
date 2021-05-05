@@ -1,6 +1,6 @@
 {
   "name": "easyttv",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "An easy-to-use wrapper for the twitch api",
   "main": "./dist/main.js",
   "scripts": {
