@@ -7,4 +7,4 @@
  *
  * @type {Object}
  */
-export declare const gme: object;
+export declare const gme: any;

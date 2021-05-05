@@ -1,7 +1,6 @@
-"use strict";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import * as unirest from "unirest";
+import axios from "axios";
 import { Database } from "jsondb";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -44,14 +43,16 @@ const clientID = cData.read("id");
  * @type {Function}
  */
 async function getNewToken() {
-  await unirest
-    .post("https://id.twitch.tv/oauth2/token")
-    .headers({ "Content-Type": "application/x-www-form-urlencoded" })
-    .send({
+  await axios({
+    method: "POST",
+    url: "https://id.twitch.tv/oauth2/token",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    params: {
       client_id: clientID,
       client_secret: cData.read("secret"),
       grant_type: "client_credentials",
-    })
+    }
+  })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .then(async (response: any) => {
       if (response.status != 200) {
@@ -106,16 +107,17 @@ async function checkAuth() {
     await getNewToken();
     return;
   }
-  const resp = await unirest
-    .get(`${helixAPI}/users?id=4`)
-    .headers({
+  const resp = await axios({
+    method: "GET",
+    url: `${helixAPI}/users?id=4`,
+    headers: {
       Authorization: auth,
       "Client-ID": clientID,
-    })
-    .send();
+    }
+  });
 
-  flog.info(`Twitch server responded with code: ${resp.code}`);
-  if (resp.code == 401) {
+  flog.info(`Twitch server responded with code: ${resp.status}`);
+  if (resp.status == 401) {
     flog.custom(
       "AUTH",
       "yellow",
@@ -137,6 +139,8 @@ async function checkAuth() {
 //* v0.1.0 (previously BETA)
 
 import { gme } from "./res/get-endpoints";
+
+export { gme };
 
 /**
  * MagicRq
@@ -166,17 +170,20 @@ class MagicRq {
   data = async (queryObject: Record<string, unknown>) => {
     let resp;
     await checkAuth();
-    await unirest[this.method](`${helixAPI}/${this.resource}`)
-      .headers({
+    await axios({
+      method: "GET",
+      baseURL: helixAPI,
+      url: this.resource,
+      headers: {
         Authorization: auth,
-        "Client-ID": clientID,
-      })
-      .query(queryObject)
-      .send()
+        "Client-ID": clientID
+      },
+      params: queryObject
+    })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then((response: any) => {
+      .then((response) => {
         flog.custom("MagicRq", "blue", "Response received.");
-        resp = response.body.data;
+        resp = response.data.data;
       });
     return resp;
   };

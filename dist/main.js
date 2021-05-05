@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.easyttvRq = exports.gme = void 0;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const unirest = require("unirest");
+const axios_1 = require("axios");
 const jsondb_1 = require("jsondb");
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -47,13 +47,15 @@ const clientID = cData.read("id");
  */
 function getNewToken() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield unirest
-            .post("https://id.twitch.tv/oauth2/token")
-            .headers({ "Content-Type": "application/x-www-form-urlencoded" })
-            .send({
-            client_id: clientID,
-            client_secret: cData.read("secret"),
-            grant_type: "client_credentials",
+        yield axios_1.default({
+            method: "POST",
+            url: "https://id.twitch.tv/oauth2/token",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            params: {
+                client_id: clientID,
+                client_secret: cData.read("secret"),
+                grant_type: "client_credentials",
+            }
         })
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .then((response) => __awaiter(this, void 0, void 0, function* () {
@@ -99,15 +101,16 @@ function checkAuth() {
             yield getNewToken();
             return;
         }
-        const resp = yield unirest
-            .get(`${helixAPI}/users?id=4`)
-            .headers({
-            Authorization: auth,
-            "Client-ID": clientID,
-        })
-            .send();
-        flog.info(`Twitch server responded with code: ${resp.code}`);
-        if (resp.code == 401) {
+        const resp = yield axios_1.default({
+            method: "GET",
+            url: `${helixAPI}/users?id=4`,
+            headers: {
+                Authorization: auth,
+                "Client-ID": clientID,
+            }
+        });
+        flog.info(`Twitch server responded with code: ${resp.status}`);
+        if (resp.status == 401) {
             flog.custom("AUTH", "yellow", "Authentication failed. Requesting new token from Twitch...");
             yield getNewToken();
             return;
@@ -148,17 +151,20 @@ class MagicRq {
         this.data = (queryObject) => __awaiter(this, void 0, void 0, function* () {
             let resp;
             yield checkAuth();
-            yield unirest[this.method](`${helixAPI}/${this.resource}`)
-                .headers({
-                Authorization: auth,
-                "Client-ID": clientID,
+            yield axios_1.default({
+                method: "GET",
+                baseURL: helixAPI,
+                url: this.resource,
+                headers: {
+                    Authorization: auth,
+                    "Client-ID": clientID
+                },
+                params: queryObject
             })
-                .query(queryObject)
-                .send()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .then((response) => {
                 flog.custom("MagicRq", "blue", "Response received.");
-                resp = response.body.data[0];
+                resp = response.data.data;
             });
             return resp;
         });

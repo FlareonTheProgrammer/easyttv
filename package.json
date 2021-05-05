@@ -15,10 +15,10 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "@types/inquirer": "^7.3.0",
+    "axios": "^0.21.1",
     "flogger": "github:FlareonTheProgrammer/fLogger",
     "inquirer": "^7.1.0",
-    "jsondb": "github:megablazedevs/jsondb",
-    "unirest": "^0.6.0"
+    "jsondb": "github:megablazedevs/jsondb"
   },
   "devDependencies": {
     "@types/node": "^14.0.24",
