@@ -5,13 +5,10 @@ clientData.json
 node_modules/
 
 # DevShit (tm)
-src/
-.eslint**
-tsconfig.json
+# src/
+# .eslint**
+# tsconfig.json
 
 # VSC
 .vscode/
 **.code-workspace
-
-# Mappings
-**.map
