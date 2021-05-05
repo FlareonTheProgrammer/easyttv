@@ -9,7 +9,6 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./dist/tests/debug.test.js",
-    // "postinstall": "node ./dist/setup/setup.js"
   },
   "author": "FlareonTheProgrammer",
   "license": "AGPL-3.0",
